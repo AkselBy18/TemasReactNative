@@ -1,0 +1,101 @@
+Nivel Básico (App Lista de tareas Todo)
+
+Componentes Básicos de React Native
+
+View, Text, Image, ScrollView, TextInput, Button, TouchableOpacity, etc.
+
+Estilos básicos con StyleSheet.
+
+Manejo del Estado y Props
+
+Uso de useState para manejar el estado.
+
+Paso de props entre componentes.
+
+Navegación entre Pantallas
+
+Configuración de React Navigation.
+
+Navegación tipo Stack (createStackNavigator).
+
+Navegación tipo Tab (createBottomTabNavigator).
+
+Listas y Scroll
+
+Uso de FlatList y SectionList.
+
+Renderizado de listas dinámicas.
+
+
+Nivel Intermedio (App de clima)
+
+Manejo de Formularios
+
+Validación de formularios.
+
+Uso de librerías como Formik y Yup.
+
+Consumo de APIs
+
+Uso de fetch o axios para consumir APIs.
+
+Manejo de estados de carga y errores.
+
+Persistencia de Datos
+
+Almacenamiento local con AsyncStorage.
+
+Uso de bases de datos locales como SQLite o Realm.
+
+Integración con Firebase Firestore (opcional).
+
+Manejo de Autenticación
+
+Implementación de login y registro.
+
+Uso de tokens JWT.
+
+Integración con Firebase Authentication (opcional).
+
+Manejo de Archivos y Multimedia
+
+Uso de la cámara y galería con expo-camera o react-native-image-picker.
+
+Subida de archivos a un servidor.
+
+
+Nivel Avanzado (Debatible)
+
+Animaciones
+
+Animaciones básicas con Animated.
+
+Uso de LayoutAnimation para animaciones simples.
+
+Librerías como Lottie para animaciones complejas.
+
+Manejo de Notificaciones Push
+
+Configuración de notificaciones push con Firebase Cloud Messaging (FCM).
+
+Uso de expo-notifications.
+
+Integración con APIs Nativas
+
+Uso de Linking para abrir enlaces y otras apps.
+
+Acceso a características del dispositivo como GPS (expo-location), sensores, etc.
+
+Pruebas y Depuración
+
+Depuración con React Native Debugger.
+
+Pruebas unitarias con Jest y React Testing Library.
+
+Pruebas de integración.
+
+Publicación de la Aplicación
+
+Generación de archivos APK (Android) y IPA (iOS).
+
+Publicación en Google Play Store y Apple App Store.

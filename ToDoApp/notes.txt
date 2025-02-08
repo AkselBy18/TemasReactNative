@@ -1,0 +1,29 @@
+TEMAS PARA ESTA SECCIÓN DEL CURSO
+
+Nivel Básico (App Lista de tareas Todo)
+
+Componentes Básicos de React Native
+    View, Text, Image, ScrollView, TextInput, Button, TouchableOpacity, etc.
+
+Estilos básicos con StyleSheet.
+
+Manejo del Estado y Props
+
+Uso de useState para manejar el estado.
+
+Paso de props entre componentes.
+
+Navegación entre Pantallas
+
+Configuración de React Navigation.
+
+Navegación tipo Stack (createStackNavigator).
+
+Navegación tipo Tab (createBottomTabNavigator).
+
+Listas y Scroll
+
+Uso de FlatList y SectionList.
+
+Renderizado de listas dinámicas.
+

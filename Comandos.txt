@@ -1,0 +1,5 @@
+1) Crear proyecto nuevo:
+	npx create-expo-app ToDoApp --template
+
+2) Para que funcione en web:
+	npx expo install react-dom react-native-web @expo/metro-runtime
