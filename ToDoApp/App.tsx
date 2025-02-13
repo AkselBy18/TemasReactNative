@@ -1,19 +1,33 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
+import ListActivities from './src/screens/ListActivities.screen';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import AddActivity from './src/screens/AddActivity.screen';
+
+const Stack = createStackNavigator();
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <StatusBar
+        backgroundColor='#141E46'
+        barStyle='light-content'
+      />
+      <Stack.Navigator
+          initialRouteName='ListActivities'
+          screenOptions={{headerShown: false}}>
+        <Stack.Screen name='ListActivities' component={ListActivities} />
+        <Stack.Screen name='AddActivity' component={AddActivity} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#141E46',
     alignItems: 'center',
     justifyContent: 'center',
   },
