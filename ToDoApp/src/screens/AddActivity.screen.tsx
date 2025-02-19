@@ -4,11 +4,14 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { iconAdd, iconBack, iconDone } from "../images/global.images";
 import { TextInput } from "react-native-gesture-handler";
 import { useEffect, useState } from "react";
+import DialogWarning from "./DialogWarning.scree";
 
 export default function AddActivity({route, navigation}: any) {
     const { activity, addActivity } = route.params || {};
     const [name, setName] = useState(activity?.name || '');
     const [description, setDescription] = useState(activity?.description || '');
+    const [errorMessage, setErrorMessage] = useState('');
+    const [showDialogWarning, setShowDialogWarning] = useState(false);
 
     useEffect(() => {
         if (activity) {
@@ -17,7 +20,24 @@ export default function AddActivity({route, navigation}: any) {
         }
     }, [activity]);
 
-    const handleSave = () => {
+    const validateInputs = () => {
+        if (!name.trim()) {
+            setErrorMessage("El nombre ingresado no es valido");
+            setShowDialogWarning(true);
+            return false;
+        }
+        if (!description.trim()) {
+            setErrorMessage("La descripción ingresada no es valida");
+            setShowDialogWarning(true);
+            return false;
+        }
+        return true;
+    }
+
+
+    const handleSave = () => { 
+        if (!validateInputs()) { return }
+
         if (activity) {
             const updateActivity = { ...activity, name, description };
             addActivity(updateActivity, true);
@@ -71,6 +91,10 @@ export default function AddActivity({route, navigation}: any) {
                     style={globalStyles.btnIcon}/>
                 </TouchableOpacity>
             </View>
+            <DialogWarning
+                message={errorMessage}
+                show={showDialogWarning}
+                onClose={() => setShowDialogWarning(false)}/>
         </SafeAreaView>
     );
 }
