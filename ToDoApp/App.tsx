@@ -2,7 +2,7 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 import ListActivities from './src/screens/ListActivities.screen';
 import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
+import { CardStyleInterpolators, createStackNavigator } from '@react-navigation/stack';
 import AddActivity from './src/screens/AddActivity.screen';
 
 const Stack = createStackNavigator();
@@ -16,7 +16,12 @@ export default function App() {
       />
       <Stack.Navigator
           initialRouteName='ListActivities'
-          screenOptions={{headerShown: false}}>
+          screenOptions={{
+            headerShown: false,
+            gestureEnabled: true,
+            gestureDirection: 'horizontal',
+            cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS
+          }}>
         <Stack.Screen name='ListActivities' component={ListActivities} />
         <Stack.Screen name='AddActivity' component={AddActivity} />
       </Stack.Navigator>

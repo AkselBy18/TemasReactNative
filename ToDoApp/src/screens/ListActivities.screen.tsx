@@ -5,17 +5,28 @@ import { Activity } from "../interfaces/activity.interface";
 import { FlatList } from "react-native-gesture-handler";
 import { CellActivity } from "./cells/CellActivity.screen";
 import { iconAdd } from "../images/global.images";
+import { useState } from "react";
 
 export default function ListActivities({ navigation }: any ) {
-
-  const activities: Activity[] = [
-    { id: 1, name: "Personal", description: "Descripción larga de actividad: Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus, iusto doloremque architecto enim harum deleniti ad amet, est asperiores maiores dolorum! Quisquam sint impedit placeat dicta error molestias consequatur cupiditate!" },
+  const [activities, setActivities] = useState([
+    { id: 1, name: "Personal", description: "Descripción larga de actividad: Actividad de pruba, puedes editar o agregar más actividades, tambien puedes eliminarlas" },
     { id: 2, name: "Pendientes", description: "Pasear al perro" },
-  ];
+  ]);
 
-  const clickCell = (activity: Activity) => {
-    console.log("click", activity);
-    
+  const addActivity = (activity: any, isEdit: boolean) => {
+    if (isEdit) {
+      setActivities((prevActivities) => 
+        prevActivities.map((item) => (item.id === activity.id ? activity : item))
+      );
+    } else {
+      setActivities((prevActivities) => [...prevActivities, activity]);
+    }
+  }
+
+  const deleteActivity = (id: number) => {
+    setActivities((prevActivities) => 
+      prevActivities.filter((activity) => activity.id !== id)
+    );
   }
 
   return (
@@ -33,13 +44,14 @@ export default function ListActivities({ navigation }: any ) {
           <CellActivity
             activity={item}
             index={index+1}
-            onPress={() => clickCell(item)}
+            onEdit={() => navigation.navigate('AddActivity', { activity: item, addActivity })}
+            onDelete={() => deleteActivity(item.id)}
           />
         )}/>
       <View style={globalStyles.boxBtnAdd}>
         <TouchableOpacity
           style={globalStyles.btnAdd}
-          onPress={() => navigation.navigate('AddActivity')}>
+          onPress={() => navigation.navigate('AddActivity', { activity: null,  addActivity })}>
           <Image
             source={ iconAdd }
             style={globalStyles.btnIcon}/>

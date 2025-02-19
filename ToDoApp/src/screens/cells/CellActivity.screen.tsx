@@ -3,7 +3,7 @@ import { cell } from "../../styles/cell.style";
 import { useState } from "react";
 import { iconDelete, iconEdit } from "../../images/global.images";
 
-export const CellActivity = ({activity, onPress, index}: any) => {
+export const CellActivity = ({activity, onEdit, onDelete, index}: any) => {
     const [isAdminMode, setIsAdminMode] = useState(false);
 
     const activeEdition = () => {
@@ -31,14 +31,20 @@ export const CellActivity = ({activity, onPress, index}: any) => {
                     { isAdminMode &&
                         <View style={[cell.actions, cell.row]}>
                             <TouchableOpacity
-                                onPress={onPress}
+                                onPress={() => {
+                                    onEdit();
+                                    activeEdition();
+                                }}
                                 style={[cell.btnAction, cell.btnEdit]}>
                                 <Image
                                     source={iconEdit}
                                     style={cell.icon}/>
                             </TouchableOpacity>
                             <TouchableOpacity
-                                onPress={onPress}
+                                onPress={() => {
+                                    onDelete();
+                                    activeEdition();
+                                }}
                                 style={[cell.btnAction, cell.btnDelete]}>
                                 <Image
                                     source={iconDelete}

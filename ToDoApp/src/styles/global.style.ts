@@ -38,5 +38,22 @@ export const globalStyles = StyleSheet.create({
         textAlign: 'center',
         marginTop: 5,
         marginBottom: 10
-    } 
+    },
+    label: {
+        fontSize: 16,
+        color: '#9b9da3',
+        fontWeight: '300'
+    },
+    input: {
+        backgroundColor: '#222a4d',
+        color: '#fff',
+        fontSize: 16,
+        borderRadius: 8,
+        marginBottom: 10,
+        marginTop: 3
+    },
+    textArea: {
+        height: 150,
+        textAlignVertical: 'top'
+    },
 });
