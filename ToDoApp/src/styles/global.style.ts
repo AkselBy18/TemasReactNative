@@ -5,15 +5,8 @@ export const globalStyles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#141E46',
         alignItems: 'center',
-        justifyContent: 'center',
-    },
-    containerList: {
-        flex: 1,
-        flexDirection: 'row',
-        backgroundColor: '#141E46',
     },
     centerV: {
-        flex: 1,
         alignItems: 'center',
     },
     row: {
