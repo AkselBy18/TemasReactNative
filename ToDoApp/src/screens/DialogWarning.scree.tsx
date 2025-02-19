@@ -1,12 +1,15 @@
 import { Image, Text, TouchableOpacity, View } from "react-native";
 import { dialog } from "../styles/dialog.style";
 import { globalStyles } from "../styles/global.style";
-import { useState } from "react";
 import { iconDone } from "../images/global.images";
 
-export default function DialogWarning({ message, show, onClose }: any ) {
-    
+interface DialogWarningProps {
+    message: string;
+    show: boolean;
+    onClose: () => void;
+}
 
+export default function DialogWarning({ message, show, onClose }: DialogWarningProps) {
     return (
         <>
             { show &&

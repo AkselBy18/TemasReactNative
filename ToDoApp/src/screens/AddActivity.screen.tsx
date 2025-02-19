@@ -5,13 +5,31 @@ import { iconAdd, iconBack, iconDone } from "../images/global.images";
 import { TextInput } from "react-native-gesture-handler";
 import { useEffect, useState } from "react";
 import DialogWarning from "./DialogWarning.scree";
+import { Activity } from "../interfaces/activity.interface";
+import { RouteProp } from "@react-navigation/native";
+import { StackNavigationProp } from "@react-navigation/stack";
 
-export default function AddActivity({route, navigation}: any) {
+type RootStackParamList = {
+    AddActivity: {
+        activity?: Activity,
+        addActivity: (activity: Activity, isUpdate: boolean) => void,
+    }
+}
+
+type AddActivityRouteProp = RouteProp<RootStackParamList, 'AddActivity'>;
+type AddActivityNavigationProp = StackNavigationProp<RootStackParamList, 'AddActivity'>;
+
+interface AddActivityProps {
+    route: AddActivityRouteProp;
+    navigation: AddActivityNavigationProp;
+}
+
+export default function AddActivity({route, navigation}: AddActivityProps) {
     const { activity, addActivity } = route.params || {};
-    const [name, setName] = useState(activity?.name || '');
-    const [description, setDescription] = useState(activity?.description || '');
-    const [errorMessage, setErrorMessage] = useState('');
-    const [showDialogWarning, setShowDialogWarning] = useState(false);
+    const [name, setName] = useState<string>(activity?.name || '');
+    const [description, setDescription] = useState<string>(activity?.description || '');
+    const [errorMessage, setErrorMessage] = useState<string>('');
+    const [showDialogWarning, setShowDialogWarning] = useState<boolean>(false);
 
     useEffect(() => {
         if (activity) {
@@ -56,13 +74,14 @@ export default function AddActivity({route, navigation}: any) {
                     style={{position: 'absolute', left: -100}}>
                     <Image
                         source={iconBack}
-                        style={globalStyles.btnIcon}/>
+                        style={globalStyles.btnIcon}
+                        />
                 </TouchableOpacity>
                 <Text style={globalStyles.title}>
                     { activity ? 'Actualizar actividad' : 'Agregar Actividad'}
                 </Text>
             </View>
-            <View style={{padding: 15, width: "100%",}}>
+            <View style={{padding: 15, width: "100%"}}>
 
                 <Text style={globalStyles.label}>Nombre:</Text>
                 <TextInput
@@ -70,7 +89,8 @@ export default function AddActivity({route, navigation}: any) {
                     placeholder=""
                     placeholderTextColor="#9b9da3"
                     value={name}
-                    onChangeText={setName}/>
+                    onChangeText={setName}
+                    />
 
                 <Text style={globalStyles.label}>Descripción:</Text>
                 <TextInput
@@ -79,7 +99,8 @@ export default function AddActivity({route, navigation}: any) {
                     placeholderTextColor="#9b9da3"
                     value={description}
                     onChangeText={setDescription}
-                    multiline={true}/>
+                    multiline={true}
+                    />
             </View>
 
             <View style={globalStyles.boxBtnAdd}>
@@ -87,14 +108,16 @@ export default function AddActivity({route, navigation}: any) {
                     onPress={handleSave}
                     style={globalStyles.btnAdd}>
                     <Image
-                    source={ iconDone }
-                    style={globalStyles.btnIcon}/>
+                        source={ iconDone }
+                        style={globalStyles.btnIcon}
+                        />
                 </TouchableOpacity>
             </View>
             <DialogWarning
                 message={errorMessage}
                 show={showDialogWarning}
-                onClose={() => setShowDialogWarning(false)}/>
+                onClose={() => setShowDialogWarning(false)}
+                />
         </SafeAreaView>
     );
 }

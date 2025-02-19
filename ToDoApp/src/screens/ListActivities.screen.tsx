@@ -8,12 +8,12 @@ import { iconAdd } from "../images/global.images";
 import { useState } from "react";
 
 export default function ListActivities({ navigation }: any ) {
-  const [activities, setActivities] = useState([
+  const [activities, setActivities] = useState<Activity[]>([
     { id: 1, name: "Personal", description: "Descripción larga de actividad: Actividad de pruba, puedes editar o agregar más actividades, tambien puedes eliminarlas" },
     { id: 2, name: "Pendientes", description: "Pasear al perro" },
   ]);
 
-  const addActivity = (activity: any, isEdit: boolean) => {
+  const addActivity = (activity: Activity, isEdit: boolean) => {
     if (isEdit) {
       setActivities((prevActivities) => 
         prevActivities.map((item) => (item.id === activity.id ? activity : item))

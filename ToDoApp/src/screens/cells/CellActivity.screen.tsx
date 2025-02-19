@@ -1,9 +1,17 @@
 import { Image, Text, TouchableOpacity, View } from "react-native";
 import { cell } from "../../styles/cell.style";
-import { useState } from "react";
+import React, { useState } from "react";
 import { iconDelete, iconEdit } from "../../images/global.images";
+import { Activity } from "../../interfaces/activity.interface";
 
-export const CellActivity = ({activity, onEdit, onDelete, index}: any) => {
+interface CellActivityProps {
+    activity: Activity;
+    index: number;
+    onEdit: () => void;
+    onDelete: () => void;
+}
+
+export const CellActivity: React.FC<CellActivityProps> = ({activity, onEdit, onDelete, index}) => {
     const [isAdminMode, setIsAdminMode] = useState(false);
 
     const activeEdition = () => {
