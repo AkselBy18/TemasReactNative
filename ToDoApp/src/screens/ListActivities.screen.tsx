@@ -6,7 +6,7 @@ import { FlatList } from "react-native-gesture-handler";
 import { CellActivity } from "./cells/CellActivity.screen";
 import { iconAdd } from "../images/global.images";
 import { useEffect, useState } from "react";
-import { createTableActivity, deleteActivity, getActivities } from "../database/database";
+import { deleteActivity, getActivities } from "../database/database";
 
 export default function ListActivities({ navigation }: any ) {
   const [activities, setActivities] = useState<Activity[]>([]);
