@@ -5,28 +5,31 @@ import { Activity } from "../interfaces/activity.interface";
 import { FlatList } from "react-native-gesture-handler";
 import { CellActivity } from "./cells/CellActivity.screen";
 import { iconAdd } from "../images/global.images";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { createTableActivity, deleteActivity, getActivities } from "../database/database";
 
 export default function ListActivities({ navigation }: any ) {
-  const [activities, setActivities] = useState<Activity[]>([
-    { id: 1, name: "Personal", description: "Descripción larga de actividad: Actividad de pruba, puedes editar o agregar más actividades, tambien puedes eliminarlas" },
-    { id: 2, name: "Pendientes", description: "Pasear al perro" },
-  ]);
+  const [activities, setActivities] = useState<Activity[]>([]);
 
-  const addActivity = (activity: Activity, isEdit: boolean) => {
-    if (isEdit) {
-      setActivities((prevActivities) => 
-        prevActivities.map((item) => (item.id === activity.id ? activity : item))
-      );
-    } else {
-      setActivities((prevActivities) => [...prevActivities, activity]);
+  const loadActivities = async () => {
+    try {
+      const data = await getActivities();
+      setActivities(data)
+    } catch (error) {
+      console.log('Error al cargar los datos', error);        
     }
   }
 
-  const deleteActivity = (id: number) => {
-    setActivities((prevActivities) => 
-      prevActivities.filter((activity) => activity.id !== id)
-    );
+  useEffect(() => {
+    const unSubscribe = navigation.addListener("focus", () => {
+      loadActivities();
+    })
+    return unSubscribe;
+  }, [navigation]);
+
+  const removeActivity = async (id: number) => {
+    await deleteActivity(id);
+    await loadActivities();
   }
 
   return (
@@ -44,14 +47,14 @@ export default function ListActivities({ navigation }: any ) {
           <CellActivity
             activity={item}
             index={index+1}
-            onEdit={() => navigation.navigate('AddActivity', { activity: item, addActivity })}
-            onDelete={() => deleteActivity(item.id)}
+            onEdit={() => navigation.navigate('AddActivity', { activity: item })}
+            onDelete={() => removeActivity(item.id)}
           />
         )}/>
       <View style={globalStyles.boxBtnAdd}>
         <TouchableOpacity
           style={globalStyles.btnAdd}
-          onPress={() => navigation.navigate('AddActivity', { activity: null,  addActivity })}>
+          onPress={() => navigation.navigate('AddActivity', { activity: null })}>
           <Image
             source={ iconAdd }
             style={globalStyles.btnIcon}/>

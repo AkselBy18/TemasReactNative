@@ -8,11 +8,11 @@ import DialogWarning from "./DialogWarning.scree";
 import { Activity } from "../interfaces/activity.interface";
 import { RouteProp } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
+import { insertActivity, updateActivity } from "../database/database";
 
 type RootStackParamList = {
     AddActivity: {
-        activity?: Activity,
-        addActivity: (activity: Activity, isUpdate: boolean) => void,
+        activity?: Activity
     }
 }
 
@@ -25,7 +25,7 @@ interface AddActivityProps {
 }
 
 export default function AddActivity({route, navigation}: AddActivityProps) {
-    const { activity, addActivity } = route.params || {};
+    const { activity } = route.params || {};
     const [name, setName] = useState<string>(activity?.name || '');
     const [description, setDescription] = useState<string>(activity?.description || '');
     const [errorMessage, setErrorMessage] = useState<string>('');
@@ -53,15 +53,12 @@ export default function AddActivity({route, navigation}: AddActivityProps) {
     }
 
 
-    const handleSave = () => { 
+    const handleSave = async () => { 
         if (!validateInputs()) { return }
-
         if (activity) {
-            const updateActivity = { ...activity, name, description };
-            addActivity(updateActivity, true);
+            await updateActivity({...activity, name, description})
         } else {
-            const newActivity = { id: Math.random(), name, description };
-            addActivity(newActivity, false);
+            await insertActivity({ id: 0, name, description });
         }
         navigation.goBack();
     }

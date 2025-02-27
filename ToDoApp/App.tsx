@@ -4,10 +4,23 @@ import ListActivities from './src/screens/ListActivities.screen';
 import { NavigationContainer } from '@react-navigation/native';
 import { CardStyleInterpolators, createStackNavigator } from '@react-navigation/stack';
 import AddActivity from './src/screens/AddActivity.screen';
+import { useEffect } from 'react';
+import { createTableActivity } from './src/database/database';
 
 const Stack = createStackNavigator();
 
 export default function App() {
+  useEffect(() => {
+    const initDatabase = async () => {
+      try {
+        await createTableActivity();
+      } catch (error) {
+        console.error("ERROR AL CREAR LA TABLA", error);
+        
+      }
+    }
+    initDatabase();
+  }, [])
   return (
     <NavigationContainer>
       <StatusBar
